@@ -20,7 +20,7 @@ export const decrease = createAction(DECREASE)();
 export const increaseBy = createAction(
   INCREASE_BY,
   (action) => (payload: number) => payload
-);
+)();
 
 // 모든 액션 객체들에 대한 타입을 준비
 const actions = { increase, decrease, increaseBy }; // 모든 액션 생성함수들을 actions 객체에 넣습니다
