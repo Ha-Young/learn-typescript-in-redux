@@ -1,9 +1,4 @@
-import {
-  createAction,
-  ActionType,
-  createReducer,
-  action,
-} from "typesafe-actions";
+import { createAction, ActionType, createReducer } from "typesafe-actions";
 
 // 액션 타입을 선언
 // 뒤에 as const 를 붙여줌으로써 나중에 액션 객체를 만들게 action.type 의 값을 추론하는 과정에서
@@ -19,7 +14,7 @@ export const decrease = createAction(DECREASE)();
 
 export const increaseBy = createAction(
   INCREASE_BY,
-  (action) => (payload: number) => payload
+  (increaseBy: number) => increaseBy
 )();
 
 // 모든 액션 객체들에 대한 타입을 준비
@@ -42,9 +37,12 @@ const initialState: CounterState = {
 const counter = createReducer(initialState, {
   [INCREASE]: (state) => ({ count: state.count + 1 }), // 액션을 참조 할 필요 없으면 파라미터로 state 만 받아와도 됩니다
   [DECREASE]: (state) => ({ count: state.count - 1 }),
-  [INCREASE_BY]: (state, action) => ({
-    count: state.count + action.payload,
-  }), // 액션의 타입을 유추 할 수 있습니다.
+  [INCREASE_BY]: (state, action) => {
+    console.log(action);
+    return {
+      count: state.count + action.payload,
+    };
+  }, // 액션의 타입을 유추 할 수 있습니다.
 });
 
 export default counter;
