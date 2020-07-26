@@ -9,7 +9,7 @@ export function getUserProfileThunk(
 ): ThunkAction<void, RootState, null, GithubAction> {
   return async (dispatch) => {
     const { request, success, failure } = getUserProfileAsync;
-    dispatch(request());
+    dispatch(request("none"));
     try {
       const userProfile = await getUserProfile(username);
       dispatch(success(userProfile));
